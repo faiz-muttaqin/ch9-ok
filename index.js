@@ -11,7 +11,7 @@ const bodyparser = require("body-parser");
 
 //middleware
 dotenv.config({ path: "./config/config.env" });
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 7000;
 app.use(morgan("dev"));
 connectDB();
 app.use(express.urlencoded({ extended: true }));
