@@ -3,7 +3,7 @@ const route = express.Router();
 const userController = require("../controllers/userController");
 
 route.get("/", (req, res) => {
-  res.send("test");
+  res.send("Ini Contoh Aplikasi akses /api-docs (sedang dalam tahap Build)");
 });
 // API User
 route.post("/api/user", userController.register); // create new user
