@@ -48,12 +48,12 @@ exports.register = async (req, res) => {
         });
       } else {
         // encryp password
-        let fullname = first_name.concat(last_name);
+        // let fullname = first_name.concat(last_name);
         let newPassword = cryptrConverter.encrypt(password);
         let createUser = await userModel.create({
           first_name: first_name,
           last_name: last_name,
-          username: fullname,
+          username: username,
           email: email,
           password: newPassword,
           phone: phone,
@@ -95,25 +95,6 @@ exports.getUser = async (req, res) => {
     try {
       let findUser = await userModel.find();
       res.json(findUser);
-    } catch (err) {
-      console.log(err);
-      res.json(err.message);
-    }
-  }
-};
-exports.getUserById = async (req, res) => {
-  if (req.params.id) {
-    let id = req.params.id;
-    let findId = await userModel.findById(id);
-    try {
-      if (!findId) {
-        res.json({
-          message: "data not found",
-          statusCode: 500,
-        });
-      } else {
-        res.json(findId);
-      }
     } catch (err) {
       console.log(err);
       res.json(err.message);
