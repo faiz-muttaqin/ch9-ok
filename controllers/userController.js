@@ -213,12 +213,7 @@ exports.createHistory = async (req, res) => {
         req.id = decoded.id
         req.username = decoded.username
       })
-    if (!decodeToken) {
-      res.json({
-        message: "invalid token..",
-        statusCode: 401
-      })
-    }
+
     let user_id = req.id
     let username = req.username
     let createHistory = await userHistory.create({
@@ -230,6 +225,12 @@ exports.createHistory = async (req, res) => {
       scheme: scheme,
       oponent: oponent,
       timestamp: timestamp
+    })
+    console.log(createHistory)
+    res.json({
+      message: "success to create new history",
+      statusCode:200,
+      result: createHistory
     })
   } catch (err) {
     console.log(err)
