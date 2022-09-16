@@ -16,6 +16,9 @@
   "servers": [
     {
       "url": "https://traditionalgame.herokuapp.com/api/"
+    },
+    {
+      "url": "https://localhost:7000/api/"
     }
   ],
   "tags": [
@@ -27,9 +30,7 @@
   "paths": {
     "/user": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create user",
         "description": "This use to register new user",
         "operationId": "register",
@@ -57,9 +58,7 @@
         }
       },
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "get all user data (need login)",
         "description": "",
         "operationId": "getAllUser",
@@ -82,9 +81,7 @@
     },
     "/user/{id}": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Get user by user name",
         "description": "",
         "operationId": "getUserByName",
@@ -119,9 +116,7 @@
         }
       },
       "put": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Update user",
         "description": "This can only be done by the logged in user.",
         "operationId": "updateUser",
@@ -153,9 +148,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Delete user",
         "description": "This can only be done by the logged in user.",
         "operationId": "deleteUser",
@@ -182,32 +175,30 @@
     },
     "/login": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Logs user into the system",
         "description": "",
         "operationId": "loginUser",
-        "requestBody":{
-          "required":"true",
-          "content":{
-              "application/x-www-form-urlencoded":{
-                  "schema":{
-                      "type":"object",
-                      "properties":{
-                          "username":{
-                              "type":"string",
-                              "example":"player1"
-                          },
-                          "password":{
-                              "type":"string",
-                              "example":"yoursecretpassword"
-                          }
-                      }
-                  }      
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "player1"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "yoursecretpassword"
+                  }
+                }
               }
+            }
           }
-      },
+        },
         "responses": {
           "200": {
             "description": "successful operation",
@@ -243,9 +234,7 @@
     },
     "/history": {
       "post": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Create history",
         "description": "This can only be done by the logged in user.",
         "operationId": "createHistory",
@@ -275,9 +264,7 @@
     },
     "/history/{id}": {
       "get": {
-        "tags": [
-          "user"
-        ],
+        "tags": ["user"],
         "summary": "Get user by user name",
         "description": "",
         "operationId": "getHistoryById",
