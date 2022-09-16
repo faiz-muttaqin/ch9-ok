@@ -181,33 +181,33 @@
       }
     },
     "/login": {
-      "get": {
+      "post": {
         "tags": [
           "user"
         ],
         "summary": "Logs user into the system",
         "description": "",
         "operationId": "loginUser",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "query",
-            "description": "The user name for login",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "The password for login in clear text",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
+        "requestBody":{
+          "required":"true",
+          "content":{
+              "application/x-www-form-urlencoded":{
+                  "schema":{
+                      "type":"object",
+                      "properties":{
+                          "username":{
+                              "type":"string",
+                              "example":"player1"
+                          },
+                          "password":{
+                              "type":"string",
+                              "example":"yoursecretpassword"
+                          }
+                      }
+                  }      
+              }
           }
-        ],
+      },
         "responses": {
           "200": {
             "description": "successful operation",
