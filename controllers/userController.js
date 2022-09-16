@@ -212,6 +212,8 @@ exports.createHistory = async (req, res) => {
         })
         req.id = decoded.id
         req.username = decoded.username
+        console.log(req.id)
+        console.log(req.username)
       })
 
     let user_id = req.id
