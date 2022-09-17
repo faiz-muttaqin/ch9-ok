@@ -2,9 +2,9 @@ const express = require("express");
 const route = express.Router();
 const userController = require("../controllers/userController");
 
-route.get("/", (req, res) => {
-  res.send("Ini Contoh Aplikasi akses /api-docs (sedang dalam tahap Build)");
-});
+// route.get("/", (req, res) => {
+//   res.send("Akses /api-docs untuk cek API yang tersedia");
+// });
 // API User
 route.post("/api/user", userController.register); // create new user
 route.get("/api/user", userController.getUser); // get all user

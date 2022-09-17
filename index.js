@@ -14,6 +14,11 @@ const swaggerUI = require("swagger-ui-express");
 //routing to api documentation
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSON));
 
+app.use(express.static(path.join(__dirname, "/", "/view")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/", "/view", "index.html"));
+});
+
 //middleware
 dotenv.config({ path: "./config/config.env" });
 const PORT = process.env.PORT || 7000;
