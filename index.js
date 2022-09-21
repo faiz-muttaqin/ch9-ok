@@ -14,10 +14,7 @@ const swaggerUI = require("swagger-ui-express");
 //routing to api documentation
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerJSON));
 
-app.use(express.static(path.join(__dirname, "/", "/view")));
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/", "/view", "index.html"));
-});
+app.use(express.static(path.join(__dirname, "/view")));
 
 //middleware
 dotenv.config({ path: "./config/config.env" });

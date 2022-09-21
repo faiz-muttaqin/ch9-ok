@@ -4,14 +4,37 @@ const cryptr = require("cryptr");
 const cryptrConverter = new cryptr(process.env.SECRET_KEY);
 const jwt = require("jsonwebtoken");
 
+//REACT VIEW
+exports.reactView = async (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "/view/index.html"));
+};
+
 // register user
 exports.register = async (req, res) => {
-  let { first_name, last_name, username, email, password,
-    phone, gender, birth, address, typeUser
+  let {
+    first_name,
+    last_name,
+    username,
+    email,
+    password,
+    phone,
+    gender,
+    birth,
+    address,
+    typeUser,
   } = req.body;
   console.log(req.body);
-  if (!first_name || !last_name || !username || !email || !password ||
-    !phone || !gender || !birth || !address || !typeUser
+  if (
+    !first_name ||
+    !last_name ||
+    !username ||
+    !email ||
+    !password ||
+    !phone ||
+    !gender ||
+    !birth ||
+    !address ||
+    !typeUser
   ) {
     res.status(400).send({
       message: "kesalahan data",
@@ -30,7 +53,7 @@ exports.register = async (req, res) => {
         });
       } else {
         // encryp password
-        let fullname = first_name.concat(last_name)
+        let fullname = first_name.concat(last_name);
         let newPassword = cryptrConverter.encrypt(password);
         let createUser = await userModel.create({
           first_name: first_name,
@@ -42,7 +65,7 @@ exports.register = async (req, res) => {
           gender: gender,
           birth: birth,
           address: address,
-          typeUser: typeUser
+          typeUser: typeUser,
         });
       }
       console.log({
@@ -61,6 +84,7 @@ exports.register = async (req, res) => {
 };
 // get user
 exports.getUser = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   if (req.query.id) {
     const id = req.query.id;
     let findId = await userModel.findById(id);
@@ -85,20 +109,20 @@ exports.getUser = async (req, res) => {
 };
 exports.getUserById = async (req, res) => {
   if (req.params.id) {
-    let id = req.params.id
-    let findId = await userModel.findById(id)
+    let id = req.params.id;
+    let findId = await userModel.findById(id);
     try {
       if (!findId) {
         res.json({
           message: "data not found",
-          statusCode: 500
-        })
+          statusCode: 500,
+        });
       } else {
-        res.json(findId)
+        res.json(findId);
       }
     } catch (err) {
-      console.log(err)
-      res.json(err.message)
+      console.log(err);
+      res.json(err.message);
     }
   }
 };
@@ -106,118 +130,125 @@ exports.updateUser = async (req, res) => {
   if (!req.body) {
     return res.json({
       message: " data tidak boleh kosong",
-      statusCode: 400
-    })
+      statusCode: 400,
+    });
   }
-  const id = req.params.id
-  userModel.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then(data => {
+  const id = req.params.id;
+  userModel
+    .findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+    .then((data) => {
       if (!data) {
         res.json({
           message: `can't update user with id ${id}. maybe user not found`,
-          statusCode: 404
-        })
+          statusCode: 404,
+        });
       } else {
         res.json({
           message: "update successfully..",
-          data: data
-        })
+          data: data,
+        });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       res.json({
         message: "error to update user",
-        statusCode: 500
-      })
-    })
+        statusCode: 500,
+      });
+    });
 };
 exports.deleteUser = async (req, res) => {
-  let id = req.params.id
+  let id = req.params.id;
   try {
-    let data = await userModel.findByIdAndDelete(id)
+    let data = await userModel.findByIdAndDelete(id);
     if (!data) {
       res.json({
         message: `can't delete user with id ${id}`,
-        statusCode: 404
-      })
+        statusCode: 404,
+      });
     } else {
       res.json({
-        message: "user was deleted successfully.."
-      })
+        message: "user was deleted successfully..",
+      });
     }
   } catch (err) {
-    console.log(err)
-    res.json(err.message)
+    console.log(err);
+    res.json(err.message);
   }
 };
 exports.login = async (req, res) => {
-  let { username, password } = req.body
+  let { username, password } = req.body;
   if (!username || !password) {
     res.json({
       message: "username or password wrong",
-      statusCode: 400
-    })
+      statusCode: 400,
+    });
   } else {
     try {
-      let findUser = await userModel.findOne({ username: username })
+      let findUser = await userModel.findOne({ username: username });
       if (!findUser || findUser.length < 0) {
         res.json({
           message: "username or password wrong",
-          statusCode: 400
-        })
+          statusCode: 400,
+        });
       } else {
-        let decryptPassword = cryptrConverter.decrypt(findUser.password)
+        let decryptPassword = cryptrConverter.decrypt(findUser.password);
         if (decryptPassword == password) {
-          
-          let token = jwt.sign({
-            id: findUser._id,
-            username: findUser.username,
-            type: findUser.typeUser
-          }, process.env.SECRET_KEY)
+          let token = jwt.sign(
+            {
+              id: findUser._id,
+              username: findUser.username,
+              type: findUser.typeUser,
+            },
+            process.env.SECRET_KEY
+          );
           console.log({
             message: "success to login..",
             statusCode: 200,
             result: {
               id: findUser._id,
               username: findUser.username,
-              token: token
-            }
-          })
-          res.cookie("token", token)
+              token: token,
+            },
+          });
+          res.cookie("token", token);
           res.json({
             message: "success to login",
-            statusCode:200,
+            statusCode: 200,
             result: {
               data: findUser,
-              token: token
-            }
-          })
+              token: token,
+            },
+          });
         }
       }
     } catch (err) {
-      console.log(err)
-      res.json(err.message)
+      console.log(err);
+      res.json(err.message);
     }
   }
 };
 exports.createHistory = async (req, res) => {
-  let { win, draw, lose, scheme, oponent, timestamp } = req.body
+  let { win, draw, lose, scheme, oponent, timestamp } = req.body;
   try {
-    const cookie = req.cookies["token"]
-    const decodeToken = jwt.verify(cookie, process.env.SECRET_KEY,
+    const cookie = req.cookies["token"];
+    const decodeToken = jwt.verify(
+      cookie,
+      process.env.SECRET_KEY,
       (err, decoded) => {
-        if (err) return res.json({
-          message: "no token detect..",
-          statusCode: 403
-        })
-        req.id = decoded.id
-        req.username = decoded.username
-        console.log(req.id)
-        console.log(req.username)
-      })
+        if (err)
+          return res.json({
+            message: "no token detect..",
+            statusCode: 403,
+          });
+        req.id = decoded.id;
+        req.username = decoded.username;
+        console.log(req.id);
+        console.log(req.username);
+      }
+    );
 
-    let user_id = req.id
-    let username = req.username
+    let user_id = req.id;
+    let username = req.username;
     let createHistory = await userHistory.create({
       user_id: user_id,
       username: username,
@@ -226,38 +257,37 @@ exports.createHistory = async (req, res) => {
       lose: lose,
       scheme: scheme,
       oponent: oponent,
-      timestamp: timestamp
-    })
-    console.log(createHistory)
+      timestamp: timestamp,
+    });
+    console.log(createHistory);
     res.json({
       message: "success to create new history",
-      statusCode:200,
-      result: createHistory
-    })
+      statusCode: 200,
+      result: createHistory,
+    });
   } catch (err) {
-    console.log(err)
-    res.json(err.message)
+    console.log(err);
+    res.json(err.message);
   }
-
 };
 exports.getHistory = async (req, res) => {
-  let id = req.query.id
-  let showHistory = await userHistory.findById(id)
+  let id = req.query.id;
+  let showHistory = await userHistory.findById(id);
   try {
     if (!showHistory) {
       res.json({
-        message: "data not found"
-      })
+        message: "data not found",
+      });
     } else {
       res.json({
         message: "success to get history",
-        result: showHistory
-      })
+        result: showHistory,
+      });
     }
   } catch (err) {
-    console.log(err)
-    res.json(err.message)
+    console.log(err);
+    res.json(err.message);
   }
 };
 
-// testing  
+// testing
