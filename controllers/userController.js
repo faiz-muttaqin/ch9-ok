@@ -3,6 +3,7 @@ const userHistory = require("../models/userHistory");
 const cryptr = require("cryptr");
 const cryptrConverter = new cryptr(process.env.SECRET_KEY);
 const jwt = require("jsonwebtoken");
+const path = require("path");
 
 //REACT VIEW
 exports.reactView = async (req, res) => {
