@@ -178,6 +178,7 @@ exports.deleteUser = async (req, res) => {
   }
 };
 exports.login = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "http://localhost:3000");
   let { username, password } = req.body;
   if (!username || !password) {
     res.json({
