@@ -26,6 +26,6 @@ route.delete("/api/user/:id", userController.deleteUser); // delete User by Id
 route.post("/api/login", userController.login); // Post user data & Verify
 
 route.post("/api/history", userController.createHistory); // Create gameplay history
-route.get("/api/history/:id", userController.getHistory); // get user gameplay history by id
+route.get("/api/history/:user_id", userController.getHistory); // get user gameplay history by id
 
 module.exports = route;
