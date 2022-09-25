@@ -55,12 +55,11 @@ exports.register = async (req, res) => {
         });
       } else {
         // encryp password
-        let fullname = first_name.concat(last_name);
         let newPassword = cryptrConverter.encrypt(password);
         let createUser = await userModel.create({
           first_name: first_name,
           last_name: last_name,
-          username: fullname,
+          username: username,
           email: email,
           password: newPassword,
           phone: phone,
