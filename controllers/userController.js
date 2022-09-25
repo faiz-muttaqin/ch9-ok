@@ -230,28 +230,9 @@ exports.login = async (req, res) => {
   }
 };
 exports.createHistory = async (req, res) => {
-  let { win, draw, lose, scheme, oponent, timestamp } = req.body;
+  let {user_id, username, win, draw, lose, scheme, oponent, timestamp } = req.body;
   try {
-    const cookie = req.cookies["token"];
-    const decodeToken = jwt.verify(
-      cookie,
-      process.env.SECRET_KEY,
-      (err, decoded) => {
-        if (err)
-          return res.json({
-            message: "no token detect..",
-            statusCode: 403,
-          });
-        req.id = decoded.id;
-        req.username = decoded.username;
-        console.log(req.id);
-        console.log(req.username);
-      }
-    );
-
-    let user_id = req.id;
-    let username = req.username;
-    let createHistory = await userHistory.create({
+      let createHistory = await userHistory.create({
       user_id: user_id,
       username: username,
       win: win,
