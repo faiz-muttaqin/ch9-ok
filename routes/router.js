@@ -19,7 +19,7 @@ route.get("/user-edit/:id", userController.reactView);
 // API User
 route.post("/api/user", userController.register); // create new user
 route.get("/api/user", userController.getUser); // get all user
-route.get("/api/user/:id", userController.getUser); //get User by Id
+route.get("/api/user/:id", userController.getUserById); //get User by Id
 route.put("/api/user/:id", userController.updateUser); //Update User by Id
 route.delete("/api/user/:id", userController.deleteUser); // delete User by Id
 

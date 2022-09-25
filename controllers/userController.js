@@ -12,6 +12,7 @@ exports.reactView = async (req, res) => {
 
 // register user
 exports.register = async (req, res) => {
+  res.set("Access-Control-Allow-Origin", "*");
   let {
     first_name,
     last_name,
@@ -290,5 +291,3 @@ exports.getHistory = async (req, res) => {
     res.json(err.message);
   }
 };
-
-// testing
