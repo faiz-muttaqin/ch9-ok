@@ -254,8 +254,9 @@ exports.createHistory = async (req, res) => {
   }
 };
 exports.getHistory = async (req, res) => {
-  let id = req.query.id;
-  let showHistory = await userHistory.findById(id);
+  let user_id = req.params.user_id;
+  let showHistory = await userHistory.find();
+  let showAll = await userHistory.find({user_id})
   try {
     if (!showHistory) {
       res.json({
@@ -264,7 +265,7 @@ exports.getHistory = async (req, res) => {
     } else {
       res.json({
         message: "success to get history",
-        result: showHistory,
+        result: showAll,
       });
     }
   } catch (err) {
