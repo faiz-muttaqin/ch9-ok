@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.962495c0.css",
-    "main.js": "/static/js/main.dd5b8766.js",
+    "main.js": "/static/js/main.fc684ad8.js",
     "static/media/the-games-bg.jpg": "/static/media/the-games-bg.0f7c47b65b003207e171.jpg",
     "static/media/requirements.png": "/static/media/requirements.71ff1e81c030a5771cf7.png",
     "static/media/rockpaperstrategy-1600.jpg": "/static/media/rockpaperstrategy-1600.1d5e292312d00d778855.jpg",
@@ -19,10 +19,10 @@
     "static/media/facebook.svg": "/static/media/facebook.7be342df0c169a2df51401c527f68414.svg",
     "static/media/scroll-down.svg": "/static/media/scroll-down.b8c299b3939916486a108214f98febd3.svg",
     "main.962495c0.css.map": "/static/css/main.962495c0.css.map",
-    "main.dd5b8766.js.map": "/static/js/main.dd5b8766.js.map"
+    "main.fc684ad8.js.map": "/static/js/main.fc684ad8.js.map"
   },
   "entrypoints": [
     "static/css/main.962495c0.css",
-    "static/js/main.dd5b8766.js"
+    "static/js/main.fc684ad8.js"
   ]
 }
