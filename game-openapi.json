@@ -1,0 +1,426 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Traditional Game - OpenAPI 3.0",
+    "description": "This is a sample Traditional Game Server based on the OpenAPI 3.0 specification.\nBuild by Ananda Maryam Pradini, Ardiano Vito Saputra Hasian, Faiz Muttaqin, Hengkie Rinaldi Nugroho, Muhammad Faqih Fitrokhudin Salim, Fauzi",
+    "termsOfService": "https://traditionalgame.herokuapp.com",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "version": "1.0.11"
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "https://traditionalgame.herokuapp.com"
+  },
+  "servers": [
+    {
+      "url": "https://traditionalgame.herokuapp.com/api/"
+    },
+    {
+      "url": "https://localhost:7000/api/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "user",
+      "description": "Operations about user"
+    }
+  ],
+  "paths": {
+    "/user": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Create user",
+        "description": "This use to register new user",
+        "operationId": "register",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": ["user"],
+        "summary": "get all user data (need login)",
+        "description": "",
+        "operationId": "getAllUser",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": ["user"],
+        "summary": "Get user by user name",
+        "description": "",
+        "operationId": "getUserByName",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      },
+      "put": {
+        "tags": ["user"],
+        "summary": "Update user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "name that need to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Update an existent user in the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["user"],
+        "summary": "Delete user",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Logs user into the system",
+        "description": "",
+        "operationId": "loginUser",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "player1"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "yoursecretpassword"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "headers": {
+              "X-Rate-Limit": {
+                "description": "calls per hour allowed by the user",
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              },
+              "X-Expires-After": {
+                "description": "date in UTC when token expires",
+                "schema": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username/password supplied"
+          }
+        }
+      }
+    },
+    "/history": {
+      "post": {
+        "tags": ["user"],
+        "summary": "Create history",
+        "description": "This can only be done by the logged in user.",
+        "operationId": "createHistory",
+        "requestBody": {
+          "description": "Created user object",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/History"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history/{id}": {
+      "get": {
+        "tags": ["user"],
+        "summary": "Get user by user name",
+        "description": "",
+        "operationId": "getHistoryById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The name that needs to be fetched. Use user1 for testing. ",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/History"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid username supplied"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "History": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "example": "6322a40feaf5a14f01bfb001"
+          },
+          "username": {
+            "type": "string",
+            "example": "binaberbina"
+          },
+          "win": {
+            "type": "number",
+            "example": 1
+          },
+          "draw": {
+            "type": "number",
+            "example": 0
+          },
+          "lose": {
+            "type": "number",
+            "example": 0
+          },
+          "oponent": {
+            "type": "string",
+            "example": "admin"
+          },
+          "timestamp": {
+            "type": "number",
+            "example": 1663250942902
+          }
+        },
+        "xml": {
+          "name": "history"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "example": "binar"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "berbinar"
+          },
+          "username": {
+            "type": "string",
+            "example": "benarberbinar"
+          },
+          "email": {
+            "type": "string",
+            "example": "binar@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": 123456
+          },
+          "phone": {
+            "type": "string",
+            "example": 81234567890
+          },
+          "gender": {
+            "type": "string",
+            "example": "male"
+          },
+          "birth": {
+            "type": "number",
+            "example": 959792400000
+          },
+          "address": {
+            "type": "string",
+            "example": "Jakarta, Indonesia"
+          },
+          "typeUser": {
+            "type": "string",
+            "description": "berisi user/admin",
+            "example": "user"
+          }
+        },
+        "xml": {
+          "name": "user"
+        }
+      }
+    },
+    "requestBodies": {
+      "UserArray": {
+        "description": "List of user object",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "https://petstore3.swagger.io/oauth/authorize",
+            "scopes": {
+              "write:pets": "modify pets in your account",
+              "read:pets": "read your pets"
+            }
+          }
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    }
+  }
+}

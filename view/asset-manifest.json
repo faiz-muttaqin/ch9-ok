@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.962495c0.css",
+    "main.js": "/static/js/main.ea7cc9fe.js",
+    "static/media/the-games-bg.jpg": "/static/media/the-games-bg.0f7c47b65b003207e171.jpg",
+    "static/media/requirements.png": "/static/media/requirements.71ff1e81c030a5771cf7.png",
+    "static/media/rockpaperstrategy-1600.jpg": "/static/media/rockpaperstrategy-1600.1d5e292312d00d778855.jpg",
+    "static/media/skull.png": "/static/media/skull.6360351b50cba1a01ddd.png",
+    "static/media/main-bg.jpg": "/static/media/main-bg.eb4e06de360ce3504542.jpg",
+    "static/media/top-score-bg.png": "/static/media/top-score-bg.d02b26cd158257e767aa.png",
+    "static/media/features.jpg": "/static/media/features.cf2447451ecf8a0dd4f8.jpg",
+    "static/media/aaron-williams.jpg": "/static/media/aaron-williams.1d329fc54b41e20f5084.jpg",
+    "static/media/jada-griffin.jpg": "/static/media/jada-griffin.c0aac76fd5774666069c.jpg",
+    "static/media/evan-lahti.jpg": "/static/media/evan-lahti.df176b04ed58b2c47931.jpg",
+    "static/media/twitter.svg": "/static/media/twitter.0bd318122f01f30d414b80da4af8a406.svg",
+    "static/media/twitch.svg": "/static/media/twitch.9150f2bb50858d0e91fdcc8f7af92c07.svg",
+    "index.html": "/index.html",
+    "static/media/vector.svg": "/static/media/vector.56ef7512e0426c5559288a518b0a4272.svg",
+    "static/media/facebook.svg": "/static/media/facebook.7be342df0c169a2df51401c527f68414.svg",
+    "static/media/scroll-down.svg": "/static/media/scroll-down.b8c299b3939916486a108214f98febd3.svg",
+    "main.962495c0.css.map": "/static/css/main.962495c0.css.map",
+    "main.ea7cc9fe.js.map": "/static/js/main.ea7cc9fe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.962495c0.css",
+    "static/js/main.ea7cc9fe.js"
+  ]
+}
